@@ -75,7 +75,7 @@ namespace WebscraperApp
             var result = await WebScraper.WebScrape(themeNumber);
             List<string> articleContentList = result.Item4;
             string chatGPTAnswer;
-            string ClipPath;
+            string clipPath;
             List<string> chatGPTAnswerList = new List<string>();
 
             for (int i = 0; i < articleContentList.Count; i++)
@@ -86,8 +86,8 @@ namespace WebscraperApp
             
             for (int i = 0; i < chatGPTAnswerList.Count; i++)
             {
-                ClipPath = await ElevenlabsProcessing.ElevenlabsProcesser(chatGPTAnswerList[i]);
-                Console.WriteLine(ClipPath);
+                clipPath = await ElevenlabsProcessing.ElevenlabsProcesser(chatGPTAnswerList[i]);
+                Console.WriteLine(clipPath);
             }
         }
 

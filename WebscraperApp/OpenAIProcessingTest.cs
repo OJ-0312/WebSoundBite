@@ -11,12 +11,12 @@ namespace WebscraperApp.Tests
     {
         [Theory]
         [InlineData("What is artificial intelligence")]
-        public async Task OpenAIProcessingTester(string ChatInput)
+        public async Task OpenAIProcessingTester(string chatInput)
         {
             bool expected = true;
             bool actual;
 
-            string result = await OpenAIProcessing.OpenAIProcesser(ChatInput);
+            string result = await OpenAIProcessing.OpenAIProcesser(chatInput);
 
 
             if (result == null)

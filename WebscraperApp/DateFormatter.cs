@@ -19,13 +19,13 @@ namespace WebscraperApp
 
         public string GetDateFormatter()
         {
-            String DayDate = thisDay.Day.ToString();
-            int MonthDate = thisDay.Month;
+            String dayDate = thisDay.Day.ToString();
+            int monthDate = thisDay.Month;
             ci = CultureInfo.CreateSpecificCulture("en-US"); // Just to make sure the date is in english
             dtfi = ci.DateTimeFormat;
-            string NewMonthDate = dtfi.GetMonthName(MonthDate).ToLower();
-            string Date = NewMonthDate.Substring(0,3) + "/" + DayDate; // The date is now in the format of "month/day"
-            return Date;
+            string newMonthDate = dtfi.GetMonthName(monthDate).ToLower();
+            string date = newMonthDate.Substring(0,3) + "/" + dayDate; // The date is now in the format of "month/day"
+            return date;
         }
     }
 }

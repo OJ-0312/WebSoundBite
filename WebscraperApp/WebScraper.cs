@@ -12,26 +12,26 @@ namespace WebscraperApp
 {
     public class WebScraper
     {
-        private static string test;
-
+        private static string finalArticleCount;
+        public static int chatGPTMaxInput = 3000;
         public static async Task<(string, string, string,List<string>)> WebScrape(int themeNumber)
         {
 
-            string? ArticleContent;
-            string ArticleXPath = "/html/body/main/article/div/div/div[6]/div/div[1]/div";
+            string? articleContent;
+            string articleXPath = "/html/body/main/article/div/div/div[6]/div/div[1]/div";
                                     
 
-            List<string> Responses = new List<string>();              //Just defining a few lists for later use
-            List<string> ArticleURL_List = new List<string>();
-            List<string> ArticleURLFiltered_List = new List<string>();
-            List<string> ArticleContentList = new List<string>();
+            List<string> responses = new List<string>();              //Just defining a few lists for later use
+            List<string> articleURLList = new List<string>();
+            List<string> articleURLFilteredList = new List<string>();
+            List<string> articleContentList = new List<string>();
 
 
-            string APIKey = new APIKeyHider().elevenlabsAPIKey;
+            string apiKey = new APIKeyHider().elevenlabsAPIKey;
             string Date = new DateFormatter().GetDateFormatter();
 
 
-            List<string> URL_List = new List<string> {
+            List<string> urlList = new List<string> {
             "https://www.theguardian.com/technology/artificialintelligenceai",
             "https://www.theguardian.com/business/fooddrinks",
             "https://www.theguardian.com/world/china",
@@ -41,7 +41,7 @@ namespace WebscraperApp
             // Find URL of the articles
             using (var httpClient = new HttpClient())
             {
-                string url = URL_List[themeNumber];                                     //Picks URL from UI
+                string url = urlList[themeNumber];                                     //Picks URL from UI
                 var html = await Task.Run(() => httpClient.GetStringAsync(url).Result);                       //Getting the HTML code from the URL
                 var htmlDocument = new HtmlDocument();                                  //Defining the HTML document
                 htmlDocument.LoadHtml(html);                                            //Loading the HTML code into the document
@@ -52,38 +52,38 @@ namespace WebscraperApp
                 {
                     if (articleElement.Attributes["class"] != null && articleElement.Attributes["class"].Value == "u-faux-block-link__overlay js-headline-text")
                     {
-                        ArticleURL_List.Add(articleElement.Attributes["href"].Value);
+                        articleURLList.Add(articleElement.Attributes["href"].Value);
                     }
                 }
 
 
 
-                foreach (var articleURL in ArticleURL_List)
+                foreach (var articleURL in articleURLList)
                 {
                     if (articleURL.Contains(Date) && !articleURL.Contains("video") && !articleURL.Contains("Live") && !articleURL.Contains("audio") && !articleURL.Contains("gallery"))
                     {
-                        ArticleURLFiltered_List.Add(articleURL);
+                        articleURLFilteredList.Add(articleURL);
                     }
 
                 }
 
-                if (ArticleURLFiltered_List.Count == 0)
+                if (articleURLFilteredList.Count == 0)
                 {
                     //append articleurl filted list with the first articleurl list item
-                    ArticleURLFiltered_List.Insert(0, (ArticleURL_List[0]));
+                    articleURLFilteredList.Insert(0, (articleURLList[0]));
                     Console.WriteLine("Testorino in chatteroni");
                 }
             }
             using (var httpClientNew = new HttpClient())
             {
 
-                for (int i = 0; i < ArticleURLFiltered_List.Count; i++)
+                for (int i = 0; i < articleURLFilteredList.Count; i++)
                 {
-                    var URLNew = ArticleURLFiltered_List[i];
-                    var htmlNew = await Task.Run(() => httpClientNew.GetStringAsync(URLNew).Result);
+                    var urlNew = articleURLFilteredList[i];
+                    var htmlNew = await Task.Run(() => httpClientNew.GetStringAsync(urlNew).Result);
                     var htmlDocumentNew = new HtmlDocument();
                     htmlDocumentNew.LoadHtml(htmlNew);
-                    var articleElementsNew = htmlDocumentNew.DocumentNode.SelectNodes(ArticleXPath);
+                    var articleElementsNew = htmlDocumentNew.DocumentNode.SelectNodes(articleXPath);
                     if (articleElementsNew == null)
                     {
                         //error exception
@@ -91,24 +91,23 @@ namespace WebscraperApp
                     }
                     //This is the part where I need to get the text from the article
                     //After finding the filtered list of URLs.
-                    test = articleElementsNew.Count.ToString();
+                    finalArticleCount = articleElementsNew.Count.ToString();
 
                     for (int k = 0; k < articleElementsNew.Count; k++)
                     {
-                        int ArticleNumber = k + 1;
-                        ArticleContent = articleElementsNew[k].InnerText;
-                        if (ArticleContent.Length >= 3000)
+                        int articleNumber = k + 1;
+                        articleContent = articleElementsNew[k].InnerText;
+                        if (articleContent.Length >= chatGPTMaxInput)
                         {
-                            ArticleContent = ArticleContent.Substring(0, 3000);
+                            articleContent = articleContent.Substring(0, chatGPTMaxInput);
                         }
-                        ArticleContentList.Add(ArticleContent);
+                        articleContentList.Add(articleContent);
                     }
 
                 }
-                return (ArticleURLFiltered_List[0], ArticleURL_List[0], test, ArticleContentList);
+                return (articleURLFilteredList[0], articleURLList[0], finalArticleCount, articleContentList);
 
             }
-            //return (ArticleURLFiltered_List[0], ArticleURL_List[0], ArticleContentList);
         }
 
     }

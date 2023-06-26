@@ -10,13 +10,13 @@ namespace WebscraperApp
 {
     public class ElevenlabsProcessing
     {
-        public static async Task<string> ElevenlabsProcesser(string SummarizedText)
+        public static async Task<string> ElevenlabsProcesser(string summarizedText)
         {
-            string APIKey = new APIKeyHider().GetAPIKeys().Item1;
-            var api = new ElevenLabsClient(new ElevenLabsAuthentication(APIKey));
+            string apiKey = new APIKeyHider().GetAPIKeys().Item1;
+            var api = new ElevenLabsClient(new ElevenLabsAuthentication(apiKey));
             var voice = (await api.VoicesEndpoint.GetAllVoicesAsync()).FirstOrDefault();
             var defaultVoiceSettings = await api.VoicesEndpoint.GetDefaultVoiceSettingsAsync();
-            var clipPath = await api.TextToSpeechEndpoint.TextToSpeechAsync(SummarizedText, voice, defaultVoiceSettings);
+            var clipPath = await api.TextToSpeechEndpoint.TextToSpeechAsync(summarizedText, voice, defaultVoiceSettings);
             return clipPath;
         }
 

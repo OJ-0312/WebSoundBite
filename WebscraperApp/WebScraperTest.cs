@@ -17,12 +17,12 @@ namespace WebscraperApp.Tests
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
-        public async Task URLTesterAsync(int ThemeNumber)
+        public async Task URLTesterAsync(int themeNumber)
         {
             bool expected = true;
 
             bool actual;
-            var result = await WebScraper.WebScrape(ThemeNumber);
+            var result = await WebScraper.WebScrape(themeNumber);
             string item1 = result.Item1;
             string item2 = result.Item2;
             string item3 = result.Item3;
@@ -45,12 +45,12 @@ namespace WebscraperApp.Tests
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
-        public async Task ArticleContentTester(int ThemeNumber)
+        public async Task ArticleContentTester(int themeNumber)
         {
             bool expected = true;
 
             bool actual;
-            var result = await WebScraper.WebScrape(ThemeNumber);
+            var result = await WebScraper.WebScrape(themeNumber);
             List<string> item4 = result.Item4;
 
             if (item4 == null)
