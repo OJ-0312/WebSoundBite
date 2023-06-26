@@ -22,7 +22,7 @@ namespace WebscraperApp.Tests
             bool expected = true;
 
             bool actual;
-            var result = await WebScraper.webScraper(ThemeNumber);
+            var result = await WebScraper.WebScrape(ThemeNumber);
             string item1 = result.Item1;
             string item2 = result.Item2;
             string item3 = result.Item3;
@@ -50,7 +50,7 @@ namespace WebscraperApp.Tests
             bool expected = true;
 
             bool actual;
-            var result = await WebScraper.webScraper(ThemeNumber);
+            var result = await WebScraper.WebScrape(ThemeNumber);
             List<string> item4 = result.Item4;
 
             if (item4 == null)

@@ -16,7 +16,7 @@ namespace WebscraperApp.Tests
             bool expected = true;
             bool actual;
 
-            string result = await OpenAIProcessing.ChatGPTAsync(ChatInput);
+            string result = await OpenAIProcessing.OpenAIProcesser(ChatInput);
 
 
             if (result == null)

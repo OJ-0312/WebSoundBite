@@ -11,12 +11,12 @@ namespace WebscraperApp.Tests
     {
         [Theory]
         [InlineData("What is artificial intelligence")]
-        public async Task elevenlabsProcessingTester(string VoiceInput)
+        public async Task ElevenlabsProcessingTester(string VoiceInput)
         {
             bool expected = true;
             bool actual;
 
-            string result = await ElevenlabsProcessing.ELAsync(VoiceInput);
+            string result = await ElevenlabsProcessing.ElevenlabsProcesser(VoiceInput);
 
 
             if (result == null)

@@ -16,6 +16,7 @@ namespace WebscraperApp
     {
         static async Task Main(string[] args)
         {
+
             bool debuggingMode;
             string? theme;
             int themeNumber;
@@ -71,7 +72,7 @@ namespace WebscraperApp
             }
             Console.WriteLine("Debugging mode is " + debuggingMode);
 
-            var result = await WebScraper.webScraper(themeNumber);
+            var result = await WebScraper.WebScrape(themeNumber);
             List<string> articleContentList = result.Item4;
             string chatGPTAnswer;
             string ClipPath;
@@ -79,13 +80,13 @@ namespace WebscraperApp
 
             for (int i = 0; i < articleContentList.Count; i++)
             {
-                chatGPTAnswer = await OpenAIProcessing.ChatGPTAsync(articleContentList[i]);
+                chatGPTAnswer = await OpenAIProcessing.OpenAIProcesser(articleContentList[i]);
                 chatGPTAnswerList.Add(chatGPTAnswer);                
             }
             
             for (int i = 0; i < chatGPTAnswerList.Count; i++)
             {
-                ClipPath = await ElevenlabsProcessing.ELAsync(chatGPTAnswerList[i]);
+                ClipPath = await ElevenlabsProcessing.ElevenlabsProcesser(chatGPTAnswerList[i]);
                 Console.WriteLine(ClipPath);
             }
         }

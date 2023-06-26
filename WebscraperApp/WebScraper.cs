@@ -14,7 +14,7 @@ namespace WebscraperApp
     {
         private static string test;
 
-        public static async Task<(string, string, string,List<string>)> webScraper(int themeNumber)
+        public static async Task<(string, string, string,List<string>)> WebScrape(int themeNumber)
         {
 
             string? ArticleContent;
@@ -60,7 +60,7 @@ namespace WebscraperApp
 
                 foreach (var articleURL in ArticleURL_List)
                 {
-                    if (articleURL.Contains(Date) && !articleURL.Contains("video") && !articleURL.Contains("Live"))
+                    if (articleURL.Contains(Date) && !articleURL.Contains("video") && !articleURL.Contains("Live") && !articleURL.Contains("audio") && !articleURL.Contains("gallery"))
                     {
                         ArticleURLFiltered_List.Add(articleURL);
                     }

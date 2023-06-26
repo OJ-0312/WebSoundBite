@@ -12,10 +12,10 @@ namespace WebscraperApp
         public static string? text;
         public static string? ArticleContent;
         //public List<string>? ResponseList;
-        public static async Task<string> ChatGPTAsync(string ArticleContent)
+        public static async Task<string> OpenAIProcesser(string ArticleContent)
         {
             List<string> ResponseList = new List<string>();
-            string APIKey = new APIKeyHider().openAIAPIKey; //Extracting API Key from APIKeyHider.cs
+            string APIKey = new APIKeyHider().GetAPIKeys().Item2; //Extracting API Key from APIKeyHider.cs txt file
             var GPTapi = new OpenAI_API.OpenAIAPI(APIKey);      //Creating a new instance of the OpenAI API
             var chat = GPTapi.Chat.CreateConversation();        //Creating a new chatgpt conversation
 

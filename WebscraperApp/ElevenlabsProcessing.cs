@@ -10,10 +10,9 @@ namespace WebscraperApp
 {
     public class ElevenlabsProcessing
     {
-
-        public static async Task<string> ELAsync(string SummarizedText)
+        public static async Task<string> ElevenlabsProcesser(string SummarizedText)
         {
-            string APIKey = new APIKeyHider().elevenlabsAPIKey;
+            string APIKey = new APIKeyHider().GetAPIKeys().Item1;
             var api = new ElevenLabsClient(new ElevenLabsAuthentication(APIKey));
             var voice = (await api.VoicesEndpoint.GetAllVoicesAsync()).FirstOrDefault();
             var defaultVoiceSettings = await api.VoicesEndpoint.GetDefaultVoiceSettingsAsync();
