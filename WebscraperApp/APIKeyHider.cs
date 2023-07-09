@@ -22,11 +22,11 @@ namespace WebscraperApp
             {
                 if (line.Contains("elevenlabsAPIKey"))
                 {
-                    elevenlabsAPIKey = line.Substring(34);
+                    elevenlabsAPIKey = line.Substring(33);
                 }
                 else if (line.Contains("openAIAPIKey"))
                 {
-                    openAIAPIKey = line.Substring(30);
+                    openAIAPIKey = line.Substring(29);
                 }
                 line = sr.ReadLine();
             }

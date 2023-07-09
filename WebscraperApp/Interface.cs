@@ -17,7 +17,6 @@ namespace WebscraperApp
         static async Task Main(string[] args)
         {
 
-            bool debuggingMode;
             string? theme;
             int themeNumber;
             
@@ -51,26 +50,6 @@ namespace WebscraperApp
                     Console.WriteLine("You have chosen an invalid option");
                     return;
             }
-
-            Console.WriteLine(
-                                "You have chosen " + theme + "               \n" +
-                                "Do you want to activate debugging mode?     \n" +
-                                "1. Yes                                      \n" +
-                                "2. No                                       \n");
-
-            switch (Console.ReadLine())
-            {
-                case "1":
-                    debuggingMode = true;
-                    break;
-                case "2":
-                    debuggingMode = false;
-                    break;
-                default:
-                    Console.WriteLine("You have chosen an invalid option");
-                    return;
-            }
-            Console.WriteLine("Debugging mode is " + debuggingMode);
 
             var result = await WebScraper.WebScrape(themeNumber);
             List<string> articleContentList = result;
