@@ -10,6 +10,7 @@ namespace WebscraperApp.Tests
 
     public class WebscraperTest
     {
+        
         public WebScraper? WS;
 
         [Theory]
@@ -22,13 +23,14 @@ namespace WebscraperApp.Tests
             bool expected = true;
 
             bool actual;
-            var result = await WebScraper.WebScrape(themeNumber);
-            string item1 = result.Item1;
-            string item2 = result.Item2;
-            string item3 = result.Item3;
-            List<string> item4 = result.Item4;
+            List<string> urlScraperResult = new List<string>();
+            List<string> urlFilterResult = new List<string>();
 
-            if (item1 != item2)
+            urlScraperResult = await WebScraper.URLScraper(themeNumber);
+            urlFilterResult = await WebScraper.URLFilter(urlScraperResult);
+
+
+            if (urlScraperResult[0] != urlFilterResult[0])
             {
                 actual = false;   
             }
@@ -50,10 +52,10 @@ namespace WebscraperApp.Tests
             bool expected = true;
 
             bool actual;
-            var result = await WebScraper.WebScrape(themeNumber);
-            List<string> item4 = result.Item4;
 
-            if (item4 == null)
+            var result = await WebScraper.WebScrape(themeNumber);
+
+            if (result == null)
             {
                 actual = false;
             }
@@ -64,6 +66,6 @@ namespace WebscraperApp.Tests
 
             Assert.Equal(expected, actual);
         }
-
+        
     }
 }

@@ -73,7 +73,7 @@ namespace WebscraperApp
             Console.WriteLine("Debugging mode is " + debuggingMode);
 
             var result = await WebScraper.WebScrape(themeNumber);
-            List<string> articleContentList = result.Item4;
+            List<string> articleContentList = result;
             string chatGPTAnswer;
             string clipPath;
             List<string> chatGPTAnswerList = new List<string>();
