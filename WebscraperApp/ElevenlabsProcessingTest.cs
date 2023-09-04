@@ -9,6 +9,10 @@ namespace WebscraperApp.Tests
 {
     public class ElevenlabsProcessingTest
     {
+        /* This just checks if the elevenlabs API interaction works. 
+         * It sends a string to the API and checks if it returns a string.
+         * Be careful as this test uses elevenlabs API tokens.
+         */
         [Theory]
         [InlineData("What is artificial intelligence")]
         public async Task ElevenlabsProcessingTester(string voiceInput)

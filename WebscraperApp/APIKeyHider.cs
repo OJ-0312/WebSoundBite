@@ -11,7 +11,11 @@ namespace WebscraperApp
     {
         public string elevenlabsAPIKey;
         public string openAIAPIKey;
-
+        /* This method reads the API keys from a text file and returns them as a tuple.
+         * It is a primitive way of hiding the API keys.
+         * Better ways of hiding the API keys are available, but this is the simplest way. 
+         * There are some solutions suggested using a proxy in the github of the openAI C# github
+         */
         public (string, string) GetAPIKeys()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/APIKeys/ApiKeys.txt";

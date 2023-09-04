@@ -19,7 +19,10 @@ namespace WebscraperApp
 
             string? theme;
             int themeNumber;
-            
+            /*
+             * Just a simple prompt to ask the user what theme they are interested in.
+             * It connects to the switch statement which then assigns the theme to a string.
+             */
 
             Console.WriteLine("Welcome to the Web Scraper App!              \n" +
                                 "What are you interested in?                \n" +
@@ -51,6 +54,10 @@ namespace WebscraperApp
                     return;
             }
 
+            /* This uses all the different classes in the project to scrape the article URLs, filter them, 
+             * scrape the content and then summarize each of them
+             * As there are several articles in a list the for loop is used to go through each of them
+             */
             var result = await WebScraper.WebScrape(themeNumber);
             List<string> articleContentList = result;
             string chatGPTAnswer;
