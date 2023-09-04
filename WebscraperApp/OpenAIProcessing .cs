@@ -14,8 +14,8 @@ namespace WebscraperApp
         public static int chatGPTMaxInput = 3000;
 
         //public List<string>? ResponseList;
-        /* This simply takes in the article content and returns a string of the summarized article
-         */
+        //This simply takes in the article content and returns a string of the summarized article using AI
+
         public static async Task<string> OpenAIProcesser(string articleContent)
         {
             List<string> responseList = new List<string>();
